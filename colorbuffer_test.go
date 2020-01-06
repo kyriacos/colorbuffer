@@ -33,18 +33,33 @@ func TestPixOffset(t *testing.T) {
 
 func TestClear(t *testing.T) {
 	cb := NewColorBuffer(width, height)
-
 	white := uint32(0xFFFFFFFF)
 
-	cb.Clear(white)
-
+	// set everything to black
 	for x := 0; x < width; x++ {
 		for y := 0; y < height; y++ {
-			if cb.At(x, y) != white {
-				t.Errorf("Image is not uniform white, 0x%-X", cb.At(x, y))
-			}
+			cb.Set(x, y, 0x00000000)
 		}
 	}
+
+	// Clear the buffer using white
+	cb.Clear(white)
+
+	all, i, j := (func() (bool, int, int) {
+		for x := 0; x < width; x++ {
+			for y := 0; y < height; y++ {
+				if cb.At(x, y) != white {
+					return false, x, y
+				}
+			}
+		}
+		return true, -1, -1
+	})()
+
+	if !all {
+		t.Errorf("Image is not uniform white. At (%d,%d) - 0x%-X", i, j, cb.At(i, j))
+	}
+
 }
 
 func TestSet(t *testing.T) {

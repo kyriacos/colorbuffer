@@ -6,4 +6,7 @@
 - [ ] Add go doc
 - [ ] Add example
 - [ ] Add Bounds method so it's closer to the image implementation?
-- [ ] Add byte order support (rgba vs bgra)
+- [ ] Add byte order support (rgba vs bgra) - benchmark
+- [ ] Add CI
+- [ ] Add quick byte check b[3]
+- [ ] Parallel?

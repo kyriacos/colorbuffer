@@ -1,9 +1,9 @@
 package colorbuffer
 
-// ColorBuffer holds all the information for the pixels.
+// ColorBuffer holds all the information for the pixels arranged as RGBA
 type ColorBuffer struct {
-	Pixels        []byte
-	Stride        int // a.k.a the pitch (Width * 4).
+	Pixels        []byte // RGBA
+	Stride        int    // a.k.a the pitch (Width * BytesPerPixel). Bytes per pixel are 4.
 	Width, Height int
 }
 
@@ -17,12 +17,6 @@ func NewColorBuffer(w, h int) *ColorBuffer {
 		Width:  w,
 		Height: h,
 	}
-}
-
-// GetPitch returns the Stride.
-// I just remember pitch instead of Stride so i added this method.
-func (cb *ColorBuffer) GetPitch() int {
-	return cb.Stride
 }
 
 // PixelOffset returns the index of the first element of Pix that corresponds to the pixel at (x, y).
